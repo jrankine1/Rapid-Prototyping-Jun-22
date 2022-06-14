@@ -4,19 +4,22 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    [SerializeField] GameObject prefab;
-    [SerializeField] Transform[] xBounds;
-    [SerializeField] Transform[] zBounds;
-    [SerializeField] float startUpTime;
-    [SerializeField] float spawnTime;
+    public GameObject enemyPrefab;
+    private float spawnRange = 9;
 
-    private void Awake()
+    private void Start()
     {
-        InvokeRepeating("Randomizer", startUpTime, spawnTime);
+       
+        Instantiate(enemyPrefab, GenerateSpawnPosition(), enemyPrefab.transform.rotation);
     }
 
-    public void Randomizer()
+    private Vector3 GenerateSpawnPosition()
     {
-        GameObject spawnedObject = Instantiate(prefab, new Vector3(Random.Range(xBounds[0].position.x, xBounds[1].position.x), 0, Random.Range(zBounds[0].position.z, zBounds[1].position.z)), Quaternion.identity);
+        float spawnPosX = Random.Range(-spawnRange, spawnRange);
+        float spawnPosZ = Random.Range(-spawnRange, spawnRange);
+        Vector3 randomPos = new Vector3(spawnPosX, 0, spawnPosZ);
+        return randomPos;
     }
+
+
 }

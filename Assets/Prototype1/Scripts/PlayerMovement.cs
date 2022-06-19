@@ -5,11 +5,13 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody playerRb;
+    public int playerLives;
     public float speed = 5.0f;
     private GameObject focalPoint;
     public bool hasPowerup;
     private float powerupStrength = 15.0f;
     public GameObject powerupIndicator;
+   
     private void Start()
     {
         playerRb = GetComponent<Rigidbody>();
@@ -21,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
         float fowardInput = Input.GetAxis("Vertical");
         playerRb.AddForce(focalPoint.transform.forward * speed * fowardInput);
         powerupIndicator.transform.position = transform.position + new Vector3(0, -0.5f, 0);
+        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -31,6 +34,12 @@ public class PlayerMovement : MonoBehaviour
             Destroy(other.gameObject);
             StartCoroutine(PowerupCountdownRoutine());
             powerupIndicator.gameObject.SetActive(true);
+        }
+
+        if (other.CompareTag("Border"))
+        {
+            playerLives -= 1;
+            transform.position = new Vector3(1.0f, 1.0f, 1.0f);
         }
     }
 
@@ -50,4 +59,6 @@ public class PlayerMovement : MonoBehaviour
         hasPowerup = false;
         powerupIndicator.gameObject.SetActive(false);
     }
+
+    
 }

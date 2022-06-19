@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class UI : MonoBehaviour
 {
@@ -16,6 +17,10 @@ public class UI : MonoBehaviour
     {
         timeText.text = "Time: " + startValue.ToString("F2");
         CountDown();
+        //if (startValue <= 0)
+        //{
+        //    SceneManager.LoadScene("GameOver");
+        //}
     }
 
     void CountDown()

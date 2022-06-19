@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody playerRb;
-    public int playerLives;
+    public int playerLives = 3;
     public float speed = 5.0f;
     private GameObject focalPoint;
     public bool hasPowerup;
@@ -23,7 +24,10 @@ public class PlayerMovement : MonoBehaviour
         float fowardInput = Input.GetAxis("Vertical");
         playerRb.AddForce(focalPoint.transform.forward * speed * fowardInput);
         powerupIndicator.transform.position = transform.position + new Vector3(0, -0.5f, 0);
-        
+        if (playerLives <= 0)
+        {
+            SceneManager.LoadScene("GameOver");
+        }
     }
 
     private void OnTriggerEnter(Collider other)

@@ -17,10 +17,10 @@ public class UI : MonoBehaviour
     {
         timeText.text = "Time: " + startValue.ToString("F2");
         CountDown();
-        //if (startValue <= 0)
-        //{
-        //    SceneManager.LoadScene("GameOver");
-        //}
+        if (startValue <= 0)
+        {
+            SceneManager.LoadScene("GameOver");
+        }
     }
 
     void CountDown()

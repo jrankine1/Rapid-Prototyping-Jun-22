@@ -15,6 +15,7 @@ public class Playtesting : GameBehaviour
     void Start()
     {
         rend = GetComponent<Renderer>();
+        _TIMER.StartTimer();
     }
 
     // Update is called once per frame

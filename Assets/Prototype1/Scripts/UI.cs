@@ -5,26 +5,32 @@ using TMPro;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
 
-public class UI : MonoBehaviour
+public class UI : GameBehaviour
 {
     public float startValue = 30;
     public float toValue;
     public TMP_Text timeText;
 
-    
+    public void Start()
+    {
+        
+        _TIMER.StartTimer(30f);
+
+    }
+
+
 
     private void Update()
     {
-        timeText.text = "Time: " + startValue.ToString("F2");
-        CountDown();
-        if (startValue <= 0)
+        if (_TIMER.TimeExpired())
         {
             SceneManager.LoadScene("GameOver");
         }
+
+        timeText.text = "Time: " + _TIMER.GetTime().ToString("F2");
     }
 
-    void CountDown()
-    {
-        startValue -= Time.deltaTime;
-    }
+    
+
+
 }

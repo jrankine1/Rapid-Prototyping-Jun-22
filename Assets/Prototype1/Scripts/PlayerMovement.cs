@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : GameBehaviour
 {
     private Rigidbody playerRb;
     public int playerLives = 3;
@@ -12,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     public bool hasPowerup;
     private float powerupStrength = 15.0f;
     public GameObject powerupIndicator;
+    
    
     private void Start()
     {
@@ -27,6 +29,11 @@ public class PlayerMovement : MonoBehaviour
         if (playerLives <= 0)
         {
             SceneManager.LoadScene("GameOver");
+        }
+
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
         }
     }
 
@@ -55,6 +62,8 @@ public class PlayerMovement : MonoBehaviour
             Vector3 awayFromPlayer = (collision.gameObject.transform.position - transform.position);
             enemyRigidbody.AddForce(awayFromPlayer * powerupStrength, ForceMode.Impulse);
         }
+
+        
     }
 
     IEnumerator PowerupCountdownRoutine()
@@ -65,4 +74,5 @@ public class PlayerMovement : MonoBehaviour
     }
 
     
+
 }

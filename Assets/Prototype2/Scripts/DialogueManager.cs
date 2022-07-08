@@ -34,18 +34,8 @@ public class DialogueManager : MonoBehaviour
 
     private void Start()
     {
+
         EnterDialogueMode(inkJson);
-
-
-        
-    }
-
-    public void EnterDialogueMode(TextAsset inkJson)
-    {
-        currentStory = new Story(inkJson.text);
-
-        ContinueStory();
-
 
         choicesText = new TextMeshProUGUI[choices.Length];
         int index = 0;
@@ -55,10 +45,24 @@ public class DialogueManager : MonoBehaviour
             index++;
         }
 
+        
+
+    }
+
+    public void EnterDialogueMode(TextAsset inkJson)
+    {
+        currentStory = new Story(inkJson.text);
+
+        ContinueStory();
+
+
+        
+
     }
 
     private void Update()
     {
+        
         if (Input.GetKeyDown(KeyCode.Space))
         {
             ContinueStory();
@@ -104,5 +108,10 @@ public class DialogueManager : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(null);
         yield return new WaitForEndOfFrame();
         EventSystem.current.SetSelectedGameObject(choices[0].gameObject);
+    }
+
+    public void MakeChoice(int choiceIndex)
+    {
+        currentStory.ChooseChoiceIndex(choiceIndex);
     }
 }

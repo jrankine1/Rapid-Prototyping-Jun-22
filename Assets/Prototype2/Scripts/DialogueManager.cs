@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using Ink.Runtime;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -67,6 +68,11 @@ public class DialogueManager : MonoBehaviour
         {
             ContinueStory();
         }
+
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
 
     private void ContinueStory()
@@ -99,6 +105,7 @@ public class DialogueManager : MonoBehaviour
         {
             choices[i].gameObject.SetActive(false);
         }
+
 
         StartCoroutine(SelectFirstChoice());
     }

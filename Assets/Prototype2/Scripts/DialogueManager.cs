@@ -63,7 +63,7 @@ public class DialogueManager : MonoBehaviour
     private void Update()
     {
         
-        if (currentStory.currentChoices.Count == 0 && Input.GetKeyDown(KeyCode.Space))
+        if (currentStory.currentChoices.Count == 0 && Input.GetKeyDown(KeyCode.Mouse0))
         {
             ContinueStory();
         }

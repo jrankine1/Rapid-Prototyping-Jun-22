@@ -31,10 +31,7 @@ public class PlayerMovement : GameBehaviour
             SceneManager.LoadScene("GameOver");
         }
 
-        if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            Application.Quit();
-        }
+        
     }
 
     private void OnTriggerEnter(Collider other)

@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Prototype2/Scenes/Prototype2.unity
     guid: f422fb45ca8b64f469aa6003df04e53c
+  - enabled: 1
+    path: Assets/Prototype3/Scenes/Prototype3.unity
+    guid: 8107a7880417f4c42b22809c5c924ff1
   m_configObjects: {}

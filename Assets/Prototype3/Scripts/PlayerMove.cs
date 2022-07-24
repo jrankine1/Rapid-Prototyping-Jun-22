@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -14,22 +15,9 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.LeftArrow))
+        if(playerHealth <= 0)
         {
-            transform.position = new Vector3(-6, 5, -51);
-            
-        }
-        if(Input.GetKeyUp(KeyCode.LeftArrow))
-        {
-            transform.position = new Vector3(0, 5, -51);
-        }
-        if(Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            transform.position = new Vector3(6, 5, -51);
-        }
-        if (Input.GetKeyUp(KeyCode.RightArrow))
-        {
-            transform.position = new Vector3(0, 5, -51);
+            SceneManager.LoadScene("GameOverProto3");
         }
     }
 

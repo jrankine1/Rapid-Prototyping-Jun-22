@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Prototype3/Scenes/Prototype3.unity
     guid: 8107a7880417f4c42b22809c5c924ff1
+  - enabled: 1
+    path: Assets/Prototype3/Scenes/GameOverProto3.unity
+    guid: d804fcea696897844acb92b949c18004
   m_configObjects: {}

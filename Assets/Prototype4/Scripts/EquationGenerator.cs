@@ -19,40 +19,60 @@ public class EquationGenerator : MonoBehaviour
     public TMP_Text secondNumber;
     public TMP_Text thirdNumber;
     public TMP_Text fourthNumber;
-    
+    public int playerHealth = 3;
+    public TMP_Text firstText;
+    public TMP_Text secondText;
+    public int firstGuess;
+    public int secondGuess;
 
     public List<int> dummyAnswers;
 
-    
+    private void Start()
+    {
+        GenerateRandomEquation();
+        GenerateRandomNumbers();
+    }
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.M))
         {
             GenerateMultiplication();
-            
+
             GenerateRandomNumbers();
         }
-            
+
         if (Input.GetKeyDown(KeyCode.A))
         {
             GenerateAddition();
             GenerateRandomNumbers();
         }
-            
+
         if (Input.GetKeyDown(KeyCode.D))
         {
             GenerateDivision();
             GenerateRandomNumbers();
         }
-            
+
         if (Input.GetKeyDown(KeyCode.R))
         {
             GenerateRandomEquation();
             GenerateRandomNumbers();
         }
 
-        
-            
+        //if (firstGuess + secondGuess == correctAnswer || firstGuess * secondGuess == correctAnswer || firstGuess / secondGuess == correctAnswer || firstGuess - secondGuess == correctAnswer)
+        //{
+        //    GenerateRandomEquation();
+        //}
+        //else
+        //{
+        //    GenerateRandomEquation();
+        //    playerHealth = -1;
+        //}
+
+        if (playerHealth <= 0)
+        {
+
+        }
     }
 
     void GenerateRandomEquation()
@@ -167,12 +187,13 @@ public class EquationGenerator : MonoBehaviour
     void GenerateRandomNumbers()
     {
 
-            firstNumber.text = numberOne.ToString();
-            secondNumber.text = GetRandomNumbers().ToString();
-            thirdNumber.text = numberTwo.ToString();
-            fourthNumber.text = GetRandomNumbers().ToString();
 
-        
+        firstNumber.text = numberOne.ToString();
+        secondNumber.text = GetRandomNumbers().ToString();
+        thirdNumber.text = numberTwo.ToString();
+        fourthNumber.text = GetRandomNumbers().ToString();
+
+
     }
 
    

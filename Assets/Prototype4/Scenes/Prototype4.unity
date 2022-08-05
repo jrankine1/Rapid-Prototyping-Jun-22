@@ -1827,6 +1827,11 @@ MonoBehaviour:
   secondNumber: {fileID: 1751847303}
   thirdNumber: {fileID: 1114699195}
   fourthNumber: {fileID: 1117723033}
+  playerHealth: 3
+  firstText: {fileID: 0}
+  secondText: {fileID: 0}
+  firstGuess: 0
+  secondGuess: 0
   dummyAnswers: 
 --- !u!4 &1472459840
 Transform:

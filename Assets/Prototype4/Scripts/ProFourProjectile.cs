@@ -1,11 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
-public class ProFourProjectile : MonoBehaviour
+public class ProFourProjectile : GameBehaviour
 {
-    void Update()
+    
+    
+    private void OnCollisionEnter(Collision collision)
     {
-        transform.position += new Vector3(0, 1, 0 * Time.deltaTime);
+        _EQ.CheckNumber(collision.gameObject.GetComponent<TMP_Text>().text);
+        collision.gameObject.SetActive(false);
+        Destroy(this.gameObject);
     }
 }

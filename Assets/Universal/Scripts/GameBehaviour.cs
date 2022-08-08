@@ -7,6 +7,7 @@ public class GameBehaviour : MonoBehaviour
 {
     protected static Timer _TIMER { get { return Timer.INSTANCE; } }
     protected static UIManager _UI { get { return UIManager.INSTANCE; } }
+    protected static EquationGenerator _EQ { get { return EquationGenerator.INSTANCE; } }
 
 
 

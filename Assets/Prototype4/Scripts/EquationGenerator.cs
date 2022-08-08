@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class EquationGenerator : MonoBehaviour
+public class EquationGenerator : GameBehaviour<EquationGenerator>
 {
     public enum Difficulty { EASY, MEDIUM, HARD }
+    public enum Equation { Addition, Subtraction, Division, Multiplication}
 
     public Difficulty difficulty;
+
+    public Equation equat;
 
     public int numberOne;
     public int numberTwo;
@@ -24,13 +27,16 @@ public class EquationGenerator : MonoBehaviour
     public TMP_Text secondText;
     public int firstGuess;
     public int secondGuess;
+    public int thirdGuess;
+    public int fourthGuess;
+
 
     public List<int> dummyAnswers;
 
     private void Start()
     {
-        GenerateRandomEquation();
-        GenerateRandomNumbers();
+        
+        Reset();
     }
     void Update()
     {
@@ -59,20 +65,9 @@ public class EquationGenerator : MonoBehaviour
             GenerateRandomNumbers();
         }
 
-        //if (firstGuess + secondGuess == correctAnswer || firstGuess * secondGuess == correctAnswer || firstGuess / secondGuess == correctAnswer || firstGuess - secondGuess == correctAnswer)
-        //{
-        //    GenerateRandomEquation();
-        //}
-        //else
-        //{
-        //    GenerateRandomEquation();
-        //    playerHealth = -1;
-        //}
+        
 
-        if (playerHealth <= 0)
-        {
-
-        }
+      
     }
 
     void GenerateRandomEquation()
@@ -100,6 +95,7 @@ public class EquationGenerator : MonoBehaviour
 
         answer.text = correctAnswer.ToString();
         equation.text = "x";
+        equat = Equation.Multiplication;
 
 
         GenerateDummyAnswers();
@@ -115,6 +111,7 @@ public class EquationGenerator : MonoBehaviour
 
         answer.text = correctAnswer.ToString();
         equation.text = "+";
+        equat = Equation.Addition;
 
         GenerateDummyAnswers();
     }
@@ -189,12 +186,53 @@ public class EquationGenerator : MonoBehaviour
 
 
         firstNumber.text = numberOne.ToString();
-        secondNumber.text = GetRandomNumbers().ToString();
+        secondNumber.text = dummyAnswers[0].ToString();
         thirdNumber.text = numberTwo.ToString();
-        fourthNumber.text = GetRandomNumbers().ToString();
+        fourthNumber.text = dummyAnswers[1].ToString();
 
-
+      
     }
 
-   
+    public void CheckNumber(string number)
+    {
+        if (firstText.text == "")
+            firstText.text = number;
+        else
+        {
+            secondText.text = number;
+            StartCoroutine(CheckAnswer());
+        }
+    }
+
+    IEnumerator CheckAnswer()
+    {
+        if(equat == Equation.Addition || equat == Equation.Multiplication)
+        {
+            if (firstText.text == numberOne.ToString() || secondText.text == numberOne.ToString() && firstText.text == numberTwo.ToString() || secondText.text == numberTwo.ToString())
+            {
+                Debug.Log("correct");
+
+            }
+            else
+                Debug.Log("Incorrect");
+        }
+        yield return new WaitForSeconds(1);
+        Reset();
+    }
+
+    private void Reset()
+    {
+        firstNumber.gameObject.SetActive(true);
+        secondNumber.gameObject.SetActive(true);
+        thirdNumber.gameObject.SetActive(true);
+        fourthNumber.gameObject.SetActive(true);
+        firstText.text = "";
+        secondText.text = "";
+        GenerateRandomEquation();
+        GenerateRandomNumbers();
+    }
+
+
+
+
 }

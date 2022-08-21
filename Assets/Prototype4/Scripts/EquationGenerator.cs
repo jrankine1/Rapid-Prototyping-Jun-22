@@ -29,6 +29,8 @@ public class EquationGenerator : GameBehaviour<EquationGenerator>
     public int secondGuess;
     public int thirdGuess;
     public int fourthGuess;
+    public TMP_Text correct;
+    public TMP_Text incorrect;
 
 
     public List<int> dummyAnswers;
@@ -206,15 +208,39 @@ public class EquationGenerator : GameBehaviour<EquationGenerator>
 
     IEnumerator CheckAnswer()
     {
-        if(equat == Equation.Addition || equat == Equation.Multiplication)
+        if (equat == Equation.Addition || equat == Equation.Multiplication)
         {
-            if (firstText.text == numberOne.ToString() || secondText.text == numberOne.ToString() && firstText.text == numberTwo.ToString() || secondText.text == numberTwo.ToString())
+            if (firstText.text == numberOne.ToString() || firstText.text == numberTwo.ToString())
             {
-                Debug.Log("correct");
-
+                if (secondText.text == numberOne.ToString() || secondText.text == numberTwo.ToString())
+                {
+                    Debug.Log("correct");
+                    correct.gameObject.SetActive(true);
+                }
+                    
+                else
+                {
+                    Debug.Log("Incorrect");
+                    incorrect.gameObject.SetActive(true);
+                }
+                    
             }
+           
+        }
+        else
+        {
+            if (firstText.text == numberOne.ToString() && secondText.text == numberTwo.ToString())
+            {
+                Debug.Log("Correct");
+                correct.gameObject.SetActive(true);
+            }
+                
             else
+            {
                 Debug.Log("Incorrect");
+                incorrect.gameObject.SetActive(true);
+            }    
+                
         }
         yield return new WaitForSeconds(1);
         Reset();
@@ -230,6 +256,8 @@ public class EquationGenerator : GameBehaviour<EquationGenerator>
         secondText.text = "";
         GenerateRandomEquation();
         GenerateRandomNumbers();
+        correct.gameObject.SetActive(false);
+        incorrect.gameObject.SetActive(false);
     }
 
 

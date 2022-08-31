@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public AudioSource music;
+    public bool startPlaying;
+    public Beatscroller beatScroller;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +17,10 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void PlayMusic()
+    {
+
     }
 }

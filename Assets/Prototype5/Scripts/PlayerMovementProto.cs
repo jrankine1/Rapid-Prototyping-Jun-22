@@ -20,6 +20,10 @@ public class PlayerMovementProto : MonoBehaviour
 
     CharacterController controller;
 
+    public GameObject rhythmGame;
+
+    public Beatscroller beatScroller;
+
     void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -47,5 +51,19 @@ public class PlayerMovementProto : MonoBehaviour
         currentYRotation = Mathf.SmoothDamp(currentYRotation, yRotation, ref yRotationV, lookSmoothness);
         transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
 
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if(other.CompareTag("Activator"))
+        {
+            if(Input.GetKeyDown(KeyCode.E))
+            {
+                rhythmGame.SetActive(true);
+                beatScroller.hasStarted = true;
+                beatScroller.PlayMusic();
+            }
+            
+        }
     }
 }

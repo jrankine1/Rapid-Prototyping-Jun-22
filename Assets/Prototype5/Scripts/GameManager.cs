@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public AudioSource music;
-    public bool startPlaying;
-    public Beatscroller beatScroller;
+    public int currentScore;
+    public int scorePerNote = 100;
+
+    public static GameManager instance;
     // Start is called before the first frame update
     void Start()
     {
-        
+        instance = this;
     }
 
     // Update is called once per frame
@@ -19,8 +20,10 @@ public class GameManager : MonoBehaviour
         
     }
 
-    public void PlayMusic()
+    public void NoteHit()
     {
-
+        currentScore += scorePerNote;
     }
+
+    
 }

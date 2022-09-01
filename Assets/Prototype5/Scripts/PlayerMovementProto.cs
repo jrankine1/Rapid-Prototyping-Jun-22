@@ -8,6 +8,7 @@ public class PlayerMovementProto : MonoBehaviour
     public float jumpSpeed = 8.0f;
     public float gravity = 20.0f;
     private Vector3 moveDirection = Vector3.zero;
+    public bool freeze;
 
     float yRotation;
     float xRotation;
@@ -35,21 +36,28 @@ public class PlayerMovementProto : MonoBehaviour
     {
         if (controller.isGrounded)
         {
-            moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-            moveDirection = transform.TransformDirection(moveDirection);
-            moveDirection *= speed;
-            if (Input.GetButton("Jump"))
-                moveDirection.y = jumpSpeed;
+            if(freeze == false)
+            {
+                moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+                moveDirection = transform.TransformDirection(moveDirection);
+                moveDirection *= speed;
+            }
+            
+            
         }
-        moveDirection.y -= gravity * Time.deltaTime;
-        controller.Move(moveDirection * Time.deltaTime);
+        if(freeze == false)
+        {
+            moveDirection.y -= gravity * Time.deltaTime;
+            controller.Move(moveDirection * Time.deltaTime);
 
-        yRotation += Input.GetAxis("Mouse X") * lookSensitivity;
-        xRotation -= Input.GetAxis("Mouse Y") * lookSensitivity;
-        xRotation = Mathf.Clamp(xRotation, -80, 100);
-        currentXRotation = Mathf.SmoothDamp(currentXRotation, xRotation, ref xRotationV, lookSmoothness);
-        currentYRotation = Mathf.SmoothDamp(currentYRotation, yRotation, ref yRotationV, lookSmoothness);
-        transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
+            yRotation += Input.GetAxis("Mouse X") * lookSensitivity;
+            xRotation -= Input.GetAxis("Mouse Y") * lookSensitivity;
+            xRotation = Mathf.Clamp(xRotation, -80, 100);
+            currentXRotation = Mathf.SmoothDamp(currentXRotation, xRotation, ref xRotationV, lookSmoothness);
+            currentYRotation = Mathf.SmoothDamp(currentYRotation, yRotation, ref yRotationV, lookSmoothness);
+            transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
+        }
+        
 
     }
 
@@ -59,11 +67,23 @@ public class PlayerMovementProto : MonoBehaviour
         {
             if(Input.GetKeyDown(KeyCode.E))
             {
-                rhythmGame.SetActive(true);
                 beatScroller.hasStarted = true;
-                beatScroller.PlayMusic();
+                StartCoroutine(Music());
             }
             
         }
+    }
+
+    IEnumerator Music()
+    {
+        Debug.Log("It fucking works");
+        rhythmGame.SetActive(true);
+        freeze = true;
+        beatScroller.music.Play();
+        yield return new WaitForSeconds(17);
+        rhythmGame.SetActive(false);
+        beatScroller.hasStarted = false;
+        freeze = false;
+        yield return null;
     }
 }

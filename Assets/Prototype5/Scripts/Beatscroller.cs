@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Beatscroller : MonoBehaviour
@@ -29,18 +27,5 @@ public class Beatscroller : MonoBehaviour
         
     }
 
-    public void PlayMusic()
-    {
-        if (hasStarted == true)
-        {
-            
-            music.Play();
-        }
-        else
-        {
-            Vector3 pos = transform.position;
-            pos.x = 0;
-            transform.position = pos;
-        }
-    }
+    
 }

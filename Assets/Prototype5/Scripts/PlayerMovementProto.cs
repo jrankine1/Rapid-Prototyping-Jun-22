@@ -67,7 +67,7 @@ public class PlayerMovementProto : MonoBehaviour
         {
             if(Input.GetKeyDown(KeyCode.E))
             {
-                beatScroller.hasStarted = true;
+                
                 StartCoroutine(Music());
             }
             
@@ -79,11 +79,15 @@ public class PlayerMovementProto : MonoBehaviour
         Debug.Log("It fucking works");
         rhythmGame.SetActive(true);
         freeze = true;
+        beatScroller.hasStarted = true;
         beatScroller.music.Play();
         yield return new WaitForSeconds(17);
         rhythmGame.SetActive(false);
         beatScroller.hasStarted = false;
+        beatScroller.NoteMove();
+        GameManager.instance.currentScore = 0;
         freeze = false;
-        yield return null;
+        
+        
     }
 }

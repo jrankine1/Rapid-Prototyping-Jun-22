@@ -20,7 +20,7 @@ public class NoteObject : MonoBehaviour
         {
             if(canBePressed)
             {
-                gameObject.SetActive(false);
+                //gameObject.SetActive(false);
                 GameManager.instance.NoteHit();
             }
         }

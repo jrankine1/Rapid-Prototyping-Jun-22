@@ -13,19 +13,25 @@ public class Beatscroller : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
-       
-       if(hasStarted == true)
+        NoteMove();
+    }
+    public void NoteMove()
+    {
+        if (hasStarted == true)
         {
             transform.position -= new Vector3(beatTempo * Time.deltaTime, 0f, 0f);
-            
+
         }
-        
-        
+        if (hasStarted == false)
+        {
+            gameObject.transform.localPosition = new Vector3(0f, 0f, 0f);
+            Debug.Log("Game is done");
+        }
     }
+
+   
 
     
 }

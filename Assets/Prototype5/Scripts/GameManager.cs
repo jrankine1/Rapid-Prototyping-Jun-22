@@ -6,6 +6,11 @@ public class GameManager : MonoBehaviour
 {
     public int currentScore;
     public int scorePerNote = 100;
+    public int doorScore;
+    public int platformScore;
+    public ObjectMove objectMove;
+    
+   
 
     public static GameManager instance;
     // Start is called before the first frame update
@@ -23,6 +28,18 @@ public class GameManager : MonoBehaviour
     public void NoteHit()
     {
         currentScore += scorePerNote;
+        switch(objectMove.objectType)
+        {
+            case (ObjectType.Door):
+                doorScore = currentScore;
+                
+                break;
+            case (ObjectType.Platform):
+                platformScore = currentScore;
+                break;
+        }
+
+        
     }
 
     

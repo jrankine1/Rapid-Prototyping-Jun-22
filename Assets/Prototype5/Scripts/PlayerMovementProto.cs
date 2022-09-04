@@ -22,8 +22,11 @@ public class PlayerMovementProto : MonoBehaviour
     CharacterController controller;
 
     public GameObject rhythmGame;
+    public GameObject indicator;
 
     public Beatscroller beatScroller;
+
+    
 
     void Start()
     {
@@ -72,6 +75,12 @@ public class PlayerMovementProto : MonoBehaviour
             }
             
         }
+        indicator.SetActive(true);
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        indicator.SetActive(false);
     }
 
     IEnumerator Music()

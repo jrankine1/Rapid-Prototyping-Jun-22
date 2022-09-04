@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMovementProto : MonoBehaviour
 {
-    public float speed = 6.0f;
+    public float speed = 10.0f;
     public float jumpSpeed = 8.0f;
     public float gravity = 20.0f;
     private Vector3 moveDirection = Vector3.zero;
@@ -73,14 +73,22 @@ public class PlayerMovementProto : MonoBehaviour
                 
                 StartCoroutine(Music());
             }
-            
+            indicator.SetActive(true);
         }
-        indicator.SetActive(true);
+        
     }
 
     private void OnTriggerExit(Collider other)
     {
-        indicator.SetActive(false);
+
+        
+        
+        
+            indicator.SetActive(false);
+         
+            
+        
+        
     }
 
     IEnumerator Music()

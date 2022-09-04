@@ -12,7 +12,7 @@ public class ObjectMove : MonoBehaviour
     public float posToMoveToX;
     public float posToMoveToY;
     public float posToMoveToZ;
-    public List<GameObject> activtorsNotInUse;
+    public GameObject activatorNotInUse;
 
     public ObjectType objectType;
     
@@ -32,16 +32,16 @@ public class ObjectMove : MonoBehaviour
         if (GameManager.instance.doorScore == 300)
         {
             ObstacleMove();
-            StartCoroutine(DoorOpen());
+            DoorOpen();
         }
         if (GameManager.instance.platformScore == 300)
         {
             ObstacleMove();
-            StartCoroutine(DoorOpen());
+            DoorOpen();
         }
         if (GameManager.instance.currentScore == 0)
         {
-            StartCoroutine(DoorOpen());
+            DoorOpen();
         }
 
 
@@ -65,26 +65,26 @@ public class ObjectMove : MonoBehaviour
         }
     }
 
-    IEnumerator DoorOpen()
+    public void DoorOpen()
     {
         if(objectType == ObjectType.Door)
         {
-            activtorsNotInUse[0].SetActive(false);
+            activatorNotInUse.SetActive(false);
             if (GameManager.instance.currentScore == 0)
             {
-                activtorsNotInUse[0].SetActive(true);
+                activatorNotInUse.SetActive(true);
             }
-            yield return null;
+            
         }
 
         if(objectType == ObjectType.Platform)
         {
-            activtorsNotInUse[0].SetActive(false);
+            activatorNotInUse.SetActive(false);
             if (GameManager.instance.currentScore == 0)
             {
-                activtorsNotInUse[0].SetActive(true);
+                activatorNotInUse.SetActive(true);
             }
-            yield return null;
+            
         }
         
     }
